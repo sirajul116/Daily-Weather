@@ -36,43 +36,48 @@ async function getFetchData(city) {
 }
 
 async function updateWeatherInfo(city) {
-  const weatherData = await getFetchData(city);
-  if (weatherData.location) {
-    console.log(weatherData);
+  try {
+    const weatherData = await getFetchData(city);
+    if (weatherData.location) {
+      console.log(weatherData);
 
-    const CITY = weatherData.location.name;
-    const DATE = new Date(weatherData.location.localtime).toDateString();
-    const TEMP = weatherData.current.temp_c;
-    const CONDITION = weatherData.current.condition.text;
-    const ICON = weatherData.current.condition.icon;
+      const CITY = weatherData.location.name;
+      const DATE = new Date(weatherData.location.localtime).toDateString();
+      const TEMP = weatherData.current.temp_c;
+      const CONDITION = weatherData.current.condition.text;
+      const ICON = weatherData.current.condition.icon;
 
-    cityNameElement.innerHTML = CITY;
-    dateElement.innerHTML = DATE;
-    tempElement.innerHTML = `${TEMP}°C`;
-    conditionElement.innerHTML = CONDITION;
-    weatherSummaryImg.src = ICON;
+      cityNameElement.innerHTML = CITY;
+      dateElement.innerHTML = DATE;
+      tempElement.innerHTML = `${TEMP}°C`;
+      conditionElement.innerHTML = CONDITION;
+      weatherSummaryImg.src = ICON;
 
-    const forecastDays = weatherData.forecast.forecastday;
+      const forecastDays = weatherData.forecast.forecastday;
 
-    forecastDays.forEach((day, index) => {
-      if (forecastItemsContainer[index]) {
-        const forecastDate = new Date(day.date).toDateString();
-        const avgTemp = day.day.avgtemp_c;
-        const forecastIcon = day.day.condition.icon;
+      forecastDays.forEach((day, index) => {
+        if (forecastItemsContainer[index]) {
+          const forecastDate = new Date(day.date).toDateString();
+          const avgTemp = day.day.avgtemp_c;
+          const forecastIcon = day.day.condition.icon;
 
-        forecastItemsContainer[index].querySelector(
-          ".forecast-item-date"
-        ).innerHTML = forecastDate;
-        forecastItemsContainer[index].querySelector(
-          ".forecast-item-temp"
-        ).innerHTML = `${avgTemp}°C`;
-        forecastItemsContainer[index].querySelector(".forecast-item-img").src =
-          forecastIcon;
-      }
-    });
+          forecastItemsContainer[index].querySelector(
+            ".forecast-item-date"
+          ).innerHTML = forecastDate;
+          forecastItemsContainer[index].querySelector(
+            ".forecast-item-temp"
+          ).innerHTML = `${avgTemp}°C`;
+          forecastItemsContainer[index].querySelector(
+            ".forecast-item-img"
+          ).src = forecastIcon;
+        }
+      });
 
-    showDis(weatherInfoSection);
-  } else {
+      showDis(weatherInfoSection);
+    } else {
+      showDis(notFoundSection);
+    }
+  } catch (error) {
     showDis(notFoundSection);
   }
 }
