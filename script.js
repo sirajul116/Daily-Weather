@@ -30,7 +30,7 @@ cityInput.addEventListener("keydown", (event) => {
 });
 
 async function getFetchData(city) {
-  const apiUrl = `http://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${city}&days=4&aqi=no&alerts=no`;
+  const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${city}&days=4&aqi=no&alerts=no`;
   const response = await fetch(apiUrl);
   return response.json();
 }
