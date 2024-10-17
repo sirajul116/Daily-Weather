@@ -35,7 +35,7 @@ body::before {
 /* ******** */
 .main-container {
   width: 300px;
-  height: 520px;
+  height: 550px;
   z-index: 1;
   background: linear-gradient(
     to top,
@@ -151,7 +151,7 @@ body::before {
   background: rgb(0, 0, 0, 0.15);
   border-radius: 99px;
 }
-.forcast-item {
+.forecast-item {
   min-width: 70px;
   background: rgb(255, 255, 255, 0.1);
   display: flex;
@@ -163,7 +163,7 @@ body::before {
   transition: 0.3s background;
 }
 
-.forcast-item:hover {
+.forecast-item:hover {
   background: rgb(255, 255, 255, 0.15);
 }
 
